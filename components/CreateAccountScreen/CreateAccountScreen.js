@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { Input, Text, Button } from 'react-native-elements';
-
+import { TouchableOpacity } from "react-native";
+import firebase from "./../../utils/firebaseConfig/firebase"
 const CreateAccountScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    console.log(email, password)
+    const createAccount = async () => {
+        try {
+            const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            navigation.navigate('Home')
+        } catch (err) {
+            setError(err.message)
+        }
+    }
 
     return (
         <>
@@ -31,9 +39,14 @@ const CreateAccountScreen = ({ navigation }) => {
                 title="Create Account"
                 onPress={() => {
                     console.log("press")
-                    navigation.navigate('Home')
+                    createAccount();
                 }}
             />
+            <TouchableOpacity
+                onPress={() => navigation.navigate('SignUp')}
+            >
+                <Text>Already have an account?</Text>
+            </TouchableOpacity>
         </>
     );
 };
