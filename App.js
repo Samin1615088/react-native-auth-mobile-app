@@ -14,10 +14,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator()
 
 const App = () => {
+  // initalRouteName temorary createAxxoutn. it will be SignUp
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signin">
-        <Stack.Screen name="Signin" component={SignupScreen} />
+      <Stack.Navigator initialRouteName="CreateAccount">  
+        <Stack.Screen name="SignUp" component={SignupScreen} />
         <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
